@@ -2,8 +2,8 @@ name: Deploy modpack
 on:
   push:
     tags:
-      - 'R*'
-      - 'R*-Extended'
+      - "R*"
+      - "R*-Extended"
 
 jobs:
   deploy:
@@ -31,7 +31,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10'
+          python-version: "3.10"
           cache: pip
 
       - name: Install dependencies
@@ -69,14 +69,14 @@ jobs:
 
       - name: Upload Curseforge
         uses: ./.github/actions/curseforge-modpack-upload
-        with: 
+        with:
           api-token: ${{ secrets.CF_API_TOKEN }}
-          project-id: '385053'
+          project-id: "385053"
           modpack-path: ./TFG New Horizons-${{ steps.get_version.outputs.VERSION }}-${{ steps.get_version.outputs.LEVEL }}-cf.zip
           modpack-server-path: ./TFG New Horizons-${{ steps.get_version.outputs.VERSION }}-${{ steps.get_version.outputs.LEVEL }}-server.zip
-          changelog: 'Check the changes here. [Github - CHANGELOG.md](https://github.com/SpeeeDCraft/TerraFirmaGreg-1.12.2/blob/Normal/Changelog_RU.md "")' 
+          changelog: 'Check the changes here. [Github - CHANGELOG.md](https://github.com/SpeeeDCraft/TerraFirmaGreg-1.12.2/blob/Normal/Changelog_RU.md "")'
           changelog-format: markdown
-          game-version: '6756' # 628 or 6756 (Accepted at either)
+          game-version: "6756" # 628 or 6756 (Accepted at either)
           display-name: TFG New Horizons-${{ steps.get_version.outputs.VERSION }}-${{ steps.get_version.outputs.LEVEL }}
           server-display-name: TFG New Horizons-${{ steps.get_version.outputs.VERSION }}-${{ steps.get_version.outputs.LEVEL }}-server
           release-type: ${{ steps.get_version.outputs.LEVEL }}
