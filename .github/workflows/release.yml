@@ -46,26 +46,7 @@ jobs:
         with:
           api-token: ${{ secrets.CF_API_TOKEN }}
           project-id: '385053'
-          modpack-path: './TFG New Horizons-${{ steps.get_release.outputs.tag_name }}.zip'
-          modpack-server-path: './TFG New Horizons-Server-${{ steps.get_release.outputs.tag_name }}.zip'
-          changelog: ${{ steps.read_changelog.outputs.content }}
-          changelog-format: 'markdown'
-          game-version: '1.12.2'
+          modpack-path: './modpack.zip'
+          game-version: '6756'
           display-name: 'TFG New Horizons ${{ steps.get_release.outputs.tag_name }}'
-          server-display-name: 'TFG New Horizons Server ${{ steps.get_release.outputs.tag_name }}'
-          release-type: ${{ steps.get_curseforge_release_type.outputs.release_type }}
-          
-      - name: Upload Modpack
-        uses: actions/upload-release-asset@v1.0.2
-        with:
-          upload_url: ${{ steps.get_release.outputs.upload_url }}
-          asset_path: ./modpack.zip
-          asset_name: 'TFG New Horizons-${{ steps.get_release.outputs.tag_name }}.zip'
-          asset_content_type: application/zip
-      - name: Upload Server
-        uses: actions/upload-release-asset@v1.0.2
-        with:
-          upload_url: ${{ steps.get_release.outputs.upload_url }}
-          asset_path: ./modpack-server.zip
-          asset_name: 'TFG New Horizons-Server-${{ steps.get_release.outputs.tag_name }}.zip'
-          asset_content_type: application/zip
+          release-type: "release"
