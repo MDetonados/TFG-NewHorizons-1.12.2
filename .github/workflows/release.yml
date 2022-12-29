@@ -19,28 +19,28 @@ jobs:
 
       - name: Write manifest
         run: sed -i 's/%MODPACK_VERSION%/${{ steps.get_release.outputs.tag_name }}/g' manifest.json
+
       - name: Zip Modpack
         run: zip -r modpack.zip *
+
       - name: Build Server
         uses: henkelmax/build-modpack-server-action@v1.0.0
         with:
           modpack-path: ./modpack.zip
           output-path: ./modpack-server.zip
+
       - name: Read Changelog
         id: read_changelog
         uses: juliangruber/read-file-action@v1
         with:
           path: ./Changelog_RU.md
+
       - name: Get Release Type
         id: get_curseforge_release_type
         run: |
           RELEASE_TYPE=$(echo ${{ steps.get_release.outputs.name }} | grep -oE '\[(.*)\]' | sed 's/[][]//g')
           echo ::set-output name=release_type::$RELEASE_TYPE
-      - name: Copy files for CurseForge upload
-        run: |
-          mkdir -p
-          cp ./modpack.zip './TFG New Horizons-${{ steps.get_release.outputs.tag_name }}.zip'
-          cp ./modpack-server.zip './TFG New Horizons-Server-${{ steps.get_release.outputs.tag_name }}.zip'
+
       - name: Upload to CurseForge
         uses: henkelmax/upload-curseforge-modpack-action@v1.0.0
         with:
@@ -54,6 +54,7 @@ jobs:
           display-name: 'TFG New Horizons ${{ steps.get_release.outputs.tag_name }}'
           server-display-name: 'TFG New Horizons Server ${{ steps.get_release.outputs.tag_name }}'
           release-type: ${{ steps.get_curseforge_release_type.outputs.release_type }}
+          
       - name: Upload Modpack
         uses: actions/upload-release-asset@v1.0.2
         with:
