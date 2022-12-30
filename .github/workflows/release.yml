@@ -49,4 +49,4 @@ jobs:
           modpack-path: './modpack.zip'
           game-version: '6756'
           display-name: 'TFG New Horizons ${{ steps.get_release.outputs.tag_name }}'
-          release-type: "release"
+          release-type: 'release'
